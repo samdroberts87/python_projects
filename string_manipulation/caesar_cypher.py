@@ -1,5 +1,6 @@
 import string
 
+
 def cypher(word, shift):
     alphabet = string.ascii_lowercase
     encrypted_text = ""
@@ -12,6 +13,7 @@ def cypher(word, shift):
             new_index = (index + shift) % len(alphabet)
             encrypted_text += alphabet[new_index]
     return encrypted_text
+
 
 password = str(input("Type the password you want to cypher\n")).lower()
 result = cypher(password, 3)
