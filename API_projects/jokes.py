@@ -9,16 +9,21 @@ categories = {
 }
 
 def main():
-    ask_again = True
-    while ask_again:
-        print()
-        chosen_category_number = int(input(f"Choose joke type. Enter corresponding number: {categories}"))
-        if chosen_category_number <= 5 and chosen_category_number > 0:
-            ask_again = False
+    
+    chosen_category_number = get_input()
     url = get_url(chosen_category_number)
     final_joke = get_joke(url)
     print(f"\nHere's your Joke:\n\n{final_joke}\n")
 
+def get_input():
+    ask_again = True
+    while ask_again:
+        print()
+        chosen_category_number = int(input(f"Choose joke type. Enter corresponding number from {categories}"))
+        if chosen_category_number <= 5 and chosen_category_number > 0:
+            ask_again = False
+    return chosen_category_number
+    
 def get_url(number):
     category = categories[number]
     return f"https://v2.jokeapi.dev/joke/{category}?type=single"
