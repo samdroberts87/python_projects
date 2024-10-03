@@ -1,4 +1,5 @@
 import requests
+import time
 
 categories = {1: "Programming", 2: "Miscellaneous", 3: "Dark", 4: "Pun", 5: "Any"}
 
@@ -9,7 +10,9 @@ def main():
         chosen_category_number = get_input()
         url = get_url(chosen_category_number)
         final_joke = get_joke(url)
-        print(f"\nHere's your Joke:\n\n{final_joke}\n")
+        print(f"\nHere's your Joke:\n\n")
+        time.sleep(1)
+        print(f"{final_joke}\n")
         another_joke = ask_for_another_joke()
 
 
