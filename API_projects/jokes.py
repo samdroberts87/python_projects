@@ -4,11 +4,13 @@ categories = {1: "Programming", 2: "Miscellaneous", 3: "Dark", 4: "Pun", 5: "Any
 
 
 def main():
-    
-    chosen_category_number = get_input()
-    url = get_url(chosen_category_number)
-    final_joke = get_joke(url)
-    print(f"\nHere's your Joke:\n\n{final_joke}\n")
+    another_joke = True
+
+        chosen_category_number = get_input()
+        url = get_url(chosen_category_number)
+        final_joke = get_joke(url)
+        print(f"\nHere's your Joke:\n\n{final_joke}\n")
+        another_joke = ask_for_another_joke()
 
 
 def get_input():
@@ -30,6 +32,14 @@ def get_joke(api_url):
     response = requests.get(api_url)
     data = response.json()
     return data["joke"]
+
+def ask_for_another_joke():
+    answer = input("\nWant another joke? (yes/no): ").strip().lower()
+    if answer in ['yes', 'y']:
+        return True
+    else:
+        print("\nThanks for using the joke app! Goodbye!\n")
+        return False
 
 
 if __name__ == "__main__":
