@@ -12,14 +12,9 @@ def main():
 
 
 def get_input():
-    ask_again = True
-    while ask_again:
-        print()
-        chosen_category_number = int(
-            input(f"Choose joke type. Enter corresponding number from {categories}")
-        )
-        if chosen_category_number <= 5 and chosen_category_number > 0:
-            ask_again = False
+    chosen_category_number = 0
+    while chosen_category_number not in range(1, len(categories)+1):
+        chosen_category_number = int(input(f"Choose joke type. Enter corresponding number from {categories}"))
     return chosen_category_number
 
 
