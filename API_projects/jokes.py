@@ -4,7 +4,7 @@ categories = {1: "Programming", 2: "Miscellaneous", 3: "Dark", 4: "Pun", 5: "Any
 
 
 def main():
-
+    
     chosen_category_number = get_input()
     url = get_url(chosen_category_number)
     final_joke = get_joke(url)
@@ -14,7 +14,10 @@ def main():
 def get_input():
     chosen_category_number = 0
     while chosen_category_number not in range(1, len(categories)+1):
-        chosen_category_number = int(input(f"Choose joke type. Enter corresponding number from {categories}"))
+        try:
+            chosen_category_number = int(input(f"\nChoose joke type. Enter corresponding number from {categories}\n:"))
+        except ValueError:
+            print(f"\nYou must enter a number between 1 and {len(categories)}\n")
     return chosen_category_number
 
 
