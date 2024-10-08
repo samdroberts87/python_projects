@@ -1,5 +1,7 @@
 import requests
 import time
+import termcolor
+
 
 categories = {1: "Programming", 2: "Miscellaneous", 3: "Dark", 4: "Pun", 5: "Any"}
 
@@ -10,12 +12,12 @@ def main():
         while another_joke:
             chosen_category_number = get_input()
             if chosen_category_number == -1:
-                break  # Break out of the loop if EOFError was encountered in get_input()
+                break
             url = get_url(chosen_category_number)
             final_joke = get_joke(url)
-            print(f"\nHere's your Joke:\n\n")
+            termcolor.cprint(f"\nHere's your Joke:\n\n", attrs=["bold"])
             time.sleep(1)
-            print(f"{final_joke}\n")
+            termcolor.cprint(f"{final_joke}\n", "green")
             another_joke = ask_for_another_joke()
     except EOFError:
         print("\nThanks for using the joke app! Goodbye!\n")
@@ -27,14 +29,17 @@ def get_input():
         try:
             chosen_category_number = int(
                 input(
-                    f"\nChoose joke type. Enter corresponding number from {categories}\n:"
+                    f"====================\n\nChoose joke type. Enter corresponding number from {categories}\n:"
                 )
             )
+            if chosen_category_number not in categories:
+                raise ValueError(f"Invalid choice! Enter a number between 1 and {len(categories)}.")
+            return chosen_category_number
         except ValueError:
-            print(f"\nYou must enter a number between 1 and {len(categories)}\n")
+            termcolor.cprint(f"\nYou must enter a number between 1 and {len(categories)}\n", "red")
         except EOFError:
-            print(f"\nThanks for using the joke app! Goodbye!\n")
-            return -1  # Returning a special value to indicate EOFError
+            termcolor.cprint(f"\nThanks for using the joke app! Goodbye!\n", "light_grey")
+            return -1
     return chosen_category_number
 
 
